@@ -1,16 +1,16 @@
 /**
  * \brief Circular Queue Logic Test Program<br>
- *			Implementes the examples to show how to use the 
+ *			Implementes the examples to show how to use the
  *			Circular Queue Implementations
  * \file test.c
  *
- * \author Abhijit Bose( info@adharlabs.in ) 
- *        A.D.H.A.R Labs (http://adharlabs.in) 
+ * \author Abhijit Bose( info@adharlabs.in )
+ *        A.D.H.A.R Labs (http://adharlabs.in)
  *		      http://m8051.blogspot.com
  *
  * \version 0.0 - First Creation - 01,JULY,2012<br>
  *
- * \par License		: Creative Commons Attribution-ShareAlike 3.0 
+ * \par License		: Creative Commons Attribution-ShareAlike 3.0
  *						Unported License.
  * Software License Agreement<br>
  * http://creativecommons.org/licenses/by-sa/3.0/legalcode
@@ -23,7 +23,7 @@
  * AUTHOR SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL,<br>
  * INCIDENTAL OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
  */
-/*-----------------------------------------------------------*/ 
+/*-----------------------------------------------------------*/
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -40,7 +40,7 @@ int main()
 	int ch=1,dt;
 	uint16_t i,sz;
 	uint8_t data;
-	
+
 	#ifndef WIN32
 	system("clear");
 	#else
@@ -50,7 +50,7 @@ int main()
 	{
 		printf("\n Error in Initializing ");
 		exit(1);
-	}	
+	}
 	while(ch!= 0)
 	{
 		printf("\n ");
@@ -64,13 +64,12 @@ int main()
 
 		printf("\nEnter your choice : ");
 		scanf("%d",&ch);
-		fflush(stdin);
+		ch = 0; // Intentional
 		switch(ch)
 		{
 			case 1:
-				 printf("\n Enter the Data to be inserted: ");
+				 printf("\n Enter the Integer Data to be inserted: ");
 				 scanf("%d",&dt);
-				 fflush(stdin);
 				 data = dt & 0x0FF;
 				 dt = cqueue_push(&cqn,data);
 				 if(dt!=STATUS_SUCCESS)
@@ -78,7 +77,6 @@ int main()
 					 printf("\n Could not Insert data Due to %d status",
 					 dt);
 				 }
-				 ch=0;
 				 break;
 			case 2:
 				if(cqueue_empty(&cqn)==STATUS_SUCCESS)

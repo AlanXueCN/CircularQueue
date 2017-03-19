@@ -3,13 +3,13 @@
  *
  * \file cq.c
  *
- * \author Abhijit Bose( info@adharlabs.in ) 
- *        A.D.H.A.R Labs (http://adharlabs.in) 
+ * \author Abhijit Bose( info@adharlabs.in )
+ *        A.D.H.A.R Labs (http://adharlabs.in)
  *		      http://m8051.blogspot.com
  *
  * \version 0.0 - First Creation - 01,JULY,2012<br>
  *
- * \par License		: Creative Commons Attribution-ShareAlike 3.0 
+ * \par License		: Creative Commons Attribution-ShareAlike 3.0
  *						Unported License.
  * Software License Agreement<br>
  * http://creativecommons.org/licenses/by-sa/3.0/legalcode
@@ -22,13 +22,13 @@
  * AUTHOR SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL,<br>
  * INCIDENTAL OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
  */
-/*-----------------------------------------------------------*/ 
+/*-----------------------------------------------------------*/
 #include<inttypes.h>
 #include "cq.h"
-/*-----------------------------------------------------------*/ 
+/*-----------------------------------------------------------*/
 ///Function Control Codes
 // NOT IMPLEMENTED
-/*-----------------------------------------------------------*/ 
+/*-----------------------------------------------------------*/
 ///Internal Function to Enable the Queue
 static uint16_t cqueue_enable(cqueue_t *q)
 {
@@ -65,7 +65,7 @@ uint16_t cqueue_empty(cqueue_t *q)
 }
 ///Function to Insert an element into the Queue
 uint16_t cqueue_push(cqueue_t *q, uint8_t data)
-{	
+{
 	if(q->inuse)
 	{
 		//ENTER_CRITICAL_SECTION
@@ -75,7 +75,7 @@ uint16_t cqueue_push(cqueue_t *q, uint8_t data)
 			q->rear = 0;
 		else
 			q->rear++;
-			
+
 		if(cqueue_full(q)==STATUS_SUCCESS)//Check if Queue is Full
 		{
 			if(q->rear == 0)
@@ -99,7 +99,7 @@ uint16_t cqueue_push(cqueue_t *q, uint8_t data)
 uint16_t cqueue_pop(cqueue_t *q,uint8_t *data)
 {
 	if(q->inuse&1)
-	{		
+	{
 		if(cqueue_empty(q)!=STATUS_SUCCESS)
 		{
 			//ENTER_CRITICAL_SECTION
@@ -126,7 +126,7 @@ uint16_t cqueue_pop(cqueue_t *q,uint8_t *data)
 uint16_t cqueue_copydata(cqueue_t *q,
 	uint8_t *loc,uint16_t *copysz,uint16_t locsz)
 {
-	uint16_t count,i;	
+	uint16_t count,i;
 	if(cqueue_empty(q)==STATUS_SUCCESS)
 	{
 		return STATUS_ERROR_QUEUE_EMPTY;
@@ -148,7 +148,7 @@ uint16_t cqueue_copydata(cqueue_t *q,
 	//}
 	cqueue_enable(q);
 	//EXIT_CRITICAL_SECTION
-	return STATUS_SUCCESS;	
+	return STATUS_SUCCESS;
 }
 ///Function to Move the Data from Queue to another buffer
 /// loc - Array where the queue Data needs to be moved
@@ -157,7 +157,7 @@ uint16_t cqueue_copydata(cqueue_t *q,
 uint16_t cqueue_movedata(cqueue_t *q,
 	uint8_t *loc,uint16_t *movesz,uint16_t locsz)
 {
-	uint16_t i;	
+	uint16_t i;
 	if(cqueue_empty(q)==STATUS_SUCCESS)
 	{
 		return STATUS_ERROR_QUEUE_EMPTY;
@@ -178,7 +178,7 @@ uint16_t cqueue_movedata(cqueue_t *q,
 	//}
 	cqueue_enable(q);
 	//EXIT_CRITICAL_SECTION
-	return STATUS_SUCCESS;	
+	return STATUS_SUCCESS;
 }
 ///Function to Move the Data Into Queue from another buffer
 /// loc - Array where the queue Data needs to be copied from
@@ -187,7 +187,7 @@ uint16_t cqueue_movedata(cqueue_t *q,
 uint16_t cqueue_movetoqueue(cqueue_t *q,
 	uint8_t *loc,uint16_t *movesz,uint16_t locsz)
 {
-	uint16_t i;		
+	uint16_t i;
 	//ENTER_CRITICAL_SECTION
 	cqueue_disable(q);
 	//{
@@ -198,7 +198,7 @@ uint16_t cqueue_movetoqueue(cqueue_t *q,
 			q->rear = 0;
 		else
 			q->rear++;
-			
+
 		if(cqueue_full(q)==STATUS_SUCCESS)//Check if Queue is Full
 		{
 			if(q->rear == 0)
@@ -217,6 +217,6 @@ uint16_t cqueue_movetoqueue(cqueue_t *q,
 	//}
 	cqueue_enable(q);
 	//EXIT_CRITICAL_SECTION
-	return STATUS_SUCCESS;	
+	return STATUS_SUCCESS;
 }
-/*-----------------------------------------------------------*/ 
+/*-----------------------------------------------------------*/
